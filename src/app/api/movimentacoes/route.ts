@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-    const { descricao, valor, tipo, data, categoria, userId } = await req.json();
+    const { descricao, valor, tipo, data, categoria, usuarioId } = await req.json();
 
     if (!descricao || !valor || !tipo || !data) {
         return NextResponse.json({ message: "Todos os campos são obrigatórios" }, { status: 400 });
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
                 data: new Date(data),
                 categoria: categoria,
                 user: {
-                    connect: { id: userId }
+                    connect: { id: usuarioId }
                 }
 
                 

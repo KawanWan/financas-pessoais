@@ -110,7 +110,7 @@ export default function Home() {
         e.preventDefault();
 
         if (!loggedId) return;
-        
+
         try {
             const response = await fetch(`/api/movimentacoes?movimentacaoId=${formData.id}}`, {
                 method: 'PUT',
@@ -216,18 +216,29 @@ export default function Home() {
 
                     <div className="mt-4">
                         <h2>Lista de Movimentações</h2>
-                        <ol className="list-group list-group-numbered">
+                        <ol className="list-group list-group-numbered mb-4">
                             {movimentacoes.length === 0 ? (
                                 <li className="list-group-item">Nenhuma movimentação encontrada</li>
                             ) : (
                                 movimentacoes.map((movimentacao) => (
                                     <li key={movimentacao.id} className="list-group-item d-flex justify-content-between align-items-start">
-                                        <div className="ms-2 me-auto">
-                                            <div className="fw-bold">{movimentacao.descricao}</div>
-                                            R$ {movimentacao.valor} - {movimentacao.tipo} <br />
 
+                                        {movimentacao.tipo == 'RECEITA' ? (<>
 
-                                        </div>
+                                            <div className="ms-2 me-auto">
+                                                <div className="fw-bold">{movimentacao.descricao}</div>
+                                                <div className='d-inline text-success'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
+                                            </div>
+
+                                        </>) : (<>
+
+                                            <div className="ms-2 me-auto">
+                                                <div className="fw-bold">{movimentacao.descricao}</div>
+                                                <div className='d-inline text-danger'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
+                                            </div>
+                                            
+                                        </>)}
+
                                         <div>
                                             <span className="badge text-bg-primary rounded-pill d-flex justify-content-center">
                                                 {new Date(movimentacao.data).toLocaleDateString()}

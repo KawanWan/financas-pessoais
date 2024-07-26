@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import Layout from '@/components/layout';
 import { useAppContext } from '@/context';
 
 export default function Profile() {
     const { loggedId, user } = useAppContext();
-    const [loading, setLoading] = useState(true);
 
     if (!loggedId) {
         window.location.href = "/login"

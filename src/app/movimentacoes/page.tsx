@@ -216,45 +216,47 @@ export default function Home() {
 
                     <div className="mt-4">
                         <h2>Lista de Movimentações</h2>
-                        <ol className="list-group list-group-numbered mb-4">
+
+                        <ol className="list-group list-group-numbered mb-5">
                             {movimentacoes.length === 0 ? (
                                 <li className="list-group-item">Nenhuma movimentação encontrada</li>
-                            ) : (
-                                movimentacoes.map((movimentacao) => (
-                                    <li key={movimentacao.id} className="list-group-item d-flex justify-content-between align-items-start">
+                            ) :
+                                (
+                                    movimentacoes.map((movimentacao) => (
+                                        <li key={movimentacao.id} className="list-group-item d-flex justify-content-between align-items-start">
 
-                                        {movimentacao.tipo == 'RECEITA' ? (<>
+                                            {movimentacao.tipo == 'RECEITA' ? (<>
 
-                                            <div className="ms-2 me-auto">
-                                                <div className="fw-bold">{movimentacao.descricao}</div>
-                                                <div className='d-inline text-success'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
+                                                <div className="ms-2 me-auto">
+                                                    <div className="fw-bold">{movimentacao.descricao}</div>
+                                                    <div className='d-inline text-success'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
+                                                </div>
+
+                                            </>) : (<>
+
+                                                <div className="ms-2 me-auto">
+                                                    <div className="fw-bold">{movimentacao.descricao}</div>
+                                                    <div className='d-inline text-danger'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
+                                                </div>
+
+                                            </>)}
+
+                                            <div>
+                                                <span className="badge text-bg-primary rounded-pill d-flex justify-content-center">
+                                                    {new Date(movimentacao.data).toLocaleDateString()}
+
+                                                </span>
+
+                                                <div className='d-flex justify-content-end mt-2 gap-2'>
+
+                                                    <button type="button" className="btn btn-sm btn-outline-warning " onClick={() => editar(movimentacao)}>Editar</button>
+                                                    <button type="button" className="btn btn-sm btn-outline-danger " data-id={movimentacao.id} onClick={() => excluir(movimentacao.id)}>Excluir</button>
+                                                </div>
                                             </div>
 
-                                        </>) : (<>
-
-                                            <div className="ms-2 me-auto">
-                                                <div className="fw-bold">{movimentacao.descricao}</div>
-                                                <div className='d-inline text-danger'>R$ {movimentacao.valor} - {movimentacao.tipo}</div> <br />
-                                            </div>
-                                            
-                                        </>)}
-
-                                        <div>
-                                            <span className="badge text-bg-primary rounded-pill d-flex justify-content-center">
-                                                {new Date(movimentacao.data).toLocaleDateString()}
-
-                                            </span>
-
-                                            <div className='d-flex justify-content-end mt-2 gap-2'>
-
-                                                <button type="button" className="btn btn-sm btn-outline-warning " onClick={() => editar(movimentacao)}>Editar</button>
-                                                <button type="button" className="btn btn-sm btn-outline-danger " data-id={movimentacao.id} onClick={() => excluir(movimentacao.id)}>Excluir</button>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                ))
-                            )}
+                                        </li>
+                                    ))
+                                )}
                         </ol>
                     </div>
 
